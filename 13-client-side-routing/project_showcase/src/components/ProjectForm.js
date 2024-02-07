@@ -1,5 +1,8 @@
 import { useState } from "react"
 
+//useNavigate takes submitted data up to parent; use function to navigate to route
+import {useOutletContext, useNavigate } from "react-router-dom"
+
 const initialState = {
     name: "",
     about: "",
@@ -8,8 +11,13 @@ const initialState = {
     image: ""
 }
 
-function ProjectForm({ onAddProject }) {
+//we don't get props anymore since it's a child now
+function ProjectForm() {
     const [ formData, setFormData ] = useState(initialState)
+
+    //from Project List, destructured
+    const { onAddProject } = useOutletContext()
+    const navigate = useNavigate()
 
     function handleChange(event) {
         const { name, value } = event.target
@@ -35,6 +43,8 @@ function ProjectForm({ onAddProject }) {
         .then((newProject) => {
             onAddProject(newProject)
             setFormData(initialState)
+            //give navigate a path you want to go; use function to navigate to route; navigates automatically (user won't see link)
+            navigate('/projects')
         })
     }
 

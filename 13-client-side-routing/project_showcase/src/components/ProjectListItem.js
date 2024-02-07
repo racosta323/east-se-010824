@@ -1,3 +1,6 @@
+//using link instead of navlink since we're not linking a navbar
+import { Link } from "react-router-dom"
+
 // function ProjectListItem({ project: { name, image, about, id, phase, link } }) {
 function ProjectListItem({ project }) {
     const { name, image, about, id, phase, link } = project
@@ -8,12 +11,7 @@ function ProjectListItem({ project }) {
             </figure>
             <article>
                 <h4>{name}</h4>
-                <p>
-                    {about}
-                </p>
-                <p>
-                   Phase: {phase}
-                </p>
+                <Link to={`/project/${id}`}>See Details</Link>
             </article>
         </li>
     )
